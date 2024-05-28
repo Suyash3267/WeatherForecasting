@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>MyWeather</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="components/Section1.css">
+
+	<link rel="stylesheet" href="components/Section2.css">
+
+
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark">
+		<a class="navbar-brand" href="index.html"> <img src="images/R.png" alt="Weather Logo" class="mr-2"
+				style="max-height: 65px;"> <span style="font-size: 30px; vertical-align: middle;">Weatherly</span>
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+			aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item active"><a class="nav-link" href="#" style="font-size: 25px;">Home</a></li>
+				<li class="nav-item"><a class="nav-link" href="#" style="font-size: 25px;">About</a></li>
+				<li class="nav-item"><a class="nav-link" href="#" style="font-size: 25px;">Services</a></li>
+				<li class="nav-item"><a class="nav-link" href="#" style="font-size: 25px;">Contact</a></li>
+				<li class="nav-item"><a class="nav-link" type="button" data-toggle="collapse"
+						data-target="#loginCollapse" aria-expanded="false" aria-controls="loginCollapse"
+						style="font-size: 20px;">
+						<span id="usernameSpan"></span>
+					</a>
+					<div class="collapse" id="loginCollapse">
+						<form action="LogOutServlet" method="post">
+							<input type="submit" class="btn btn-primary btn-block bg-danger logout_button"
+								style="font-size: 18px; border: hidden;" value="Log Out">
+						</form>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+
+	<div class="section">
+		<div class="search">
+			<input type="text" id="cityInput" placeholder="Enter The City Name" spellcheck="false">
+			<button onclick="getWeatherD()">
+				<img src="images/search.png" alt="Search">
+			</button>
+		</div>
+		<div class="weather">
+			<div class="details3">
+				<img src="images/rain.png" class="weather-icon" alt="Weather Icon">
+				<h1 class="temp">Temperature</h1>
+				<h2 class="city">City</h2>
+			</div>
+			<div class="divflex">
+				<div class="details1 dd">
+					<br>
+					<br>
+					<br>
+					<br>
+					<div class="col">
+						<img src="images/humidity.png" alt="Humidity Icon">
+						<div>
+							<strong>
+								<p class="humidity"></p>
+							</strong>
+							<p>Humidity</p>
+						</div>
+					</div>
+					<div class="col">
+						<img src="images/wind.png" alt="Wind Icon">
+						<div>
+							<strong>
+								<p class="wind"></p>
+							</strong>
+							<p>Wind Speed</p>
+						</div>
+					</div>
+					<div class="col">
+						<img src="images/pressure.png" alt="Pressure Icon">
+						<div>
+							<strong>
+								<p class="pressure"></p>
+							</strong>
+							<p>Pressure</p>
+						</div>
+					</div>
+					<div class="col">
+						<img src="images/sunrise.png" alt="Sunrise Icon">
+						<div>
+							<strong>
+								<p class="sunrise"></p>
+							</strong>
+							<p>Sunrise</p>
+						</div>
+					</div>
+					<div class="col">
+						<img src="images/sunset.png" alt="Sunset Icon">
+						<div>
+							<strong>
+								<p class="sunset"></p>
+							</strong>
+							<p>Sunset</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="details1 bb">
+					<h3 style="padding: 15px;">
+						<strong>Daily Weather Forecast </strong>
+					</h3>
+					<div class="dailyForecast" style="padding: 10px;">
+						<!-- Here will be the widgets -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="section2">
+
+
+		<div class="mapANDchart">
+
+			<h3 style="padding: 15px;">
+				<strong>Hourly Weather Forecast <h4>(3 Hours) </h4></strong>
+				<small><i> (Graphical Representation)</i> </small>
+			</h3>
+			<div class="chart" id="chart">
+
+				<canvas id="pivotChart"></canvas>
+			</div>
+
+			<h3 style="padding: 15px;">
+				<strong>Map of city</strong>
+			</h3>
+			<div id="map">
+				<iframe id="mapIframe" src="" width="100%" height="100%" allowfullscreen> </iframe>
+			</div>
+
+		</div>
+
+		<div>
+			<h3 style="padding: 15px;">
+				<strong>Hourly Weather Forecast</strong> <br>
+				<small> <i>(Forecast per 3 Hours for next 2 days)</i></small>
+			</h3>
+			<div class="weatherForecast_Per3hr" id="weatherForecast_Per3hr">
+			</div>
+		</div>
+
+	</div>
+
+	<footer class="footer mt-auto py-3 bg-dark text-white">
+		<div class="container text-center">
+			<span>&copy; 2023 Your Weatherly App. All rights reserved.</span>
+		</div>
+	</footer>
+
+
+
+
+
+
+	<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+	<script src="components/session.js"></script>
+	<script src="components/CurrentWeather_Map_DailyForcast.js"></script>
+	<script src="components/HourlyForc_Chart.js"></script>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
